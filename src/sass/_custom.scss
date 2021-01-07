@@ -1,0 +1,39 @@
+
+// colors palete
+$primary: #3c5cbf;
+$secondary: #e4e5e9;
+$success: #3f8760;
+$info: #4BACF0;
+$warning:#F0D832;
+$danger: #cf8393;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+);
+
+// body background
+$body-bg:#f4f5f7;
+
+// inputs
+$input-btn-focus-width: .1rem;
+
+// btn
+$btn-focus-width:         0;
+$btn-border-radius:       0;
+$btn-border-radius-lg:    0;
+$btn-border-radius-sm:    0;
+
+// modal
+$modal-backdrop-opacity: .3;
+
+// card
+$card-border-color:    none;
+
+
+
+@import "~bootstrap/scss/bootstrap";

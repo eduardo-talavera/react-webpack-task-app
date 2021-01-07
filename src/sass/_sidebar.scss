@@ -1,0 +1,30 @@
+#sidebar {
+  position: fixed;
+  right: -350px;
+  top: 0;
+  z-index: 10;
+  height: 100vh;
+  width: 350px;
+  background-color: white;
+  box-shadow: 10px -10px 7px 7px black;
+  transition: .5s ease-in-out;
+
+  .sidebar-content {
+    height: 90%;
+  }
+
+  .sidebar-footer {
+    position: relative;
+    bottom: 20px;
+  }
+
+}
+
+.open {
+  right: 0!important;
+}
+
+.close {
+  right: -350!important;
+  transition: .3s ease-in-out;
+}

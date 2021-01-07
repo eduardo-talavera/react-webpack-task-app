@@ -1,0 +1,36 @@
+@import "custom";
+@import "sidebar";
+@import "date_picker";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+body {
+  h1,h2,h3,h4,h5,h6{
+    font: {
+      family: 'Roboto', sans-serif;
+    }
+  }
+  input{
+    &:hover {
+      border-color: #a6a9b4;
+    }
+  }
+  .btn {
+    font-weight: 600;
+    min-width: 100px;
+  }
+  .btn-custom{
+    &:hover{
+      background-color: #f4f5f7;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  .content-tasks {
+    width: 80%;
+    margin: auto;
+    @media (max-width: 800px) { width: 100%; }
+  }
+}
