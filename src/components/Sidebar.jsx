@@ -1,16 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodoAction } from "../redux/actions";
+import { deleteTodoAction, getSingleTodoAction, toggleTodoAction } from "../redux/actions";
 import moment from "moment";
 import Modal from "./Modal";
 import { isAuthenticated } from "../auth";
 
+
+
 function Sidebar() {
+
   const todo = useSelector((state) => state.singleTodo);
   const dispatch = useDispatch();
   const sidebar = document.getElementById("sidebar");
-
+ 
   const {user, token} = isAuthenticated();
+
+  const f = todo ? new Date(todo.createdAt) : null;
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const closeSidebar = () => {
     sidebar.classList.add("close");
@@ -19,26 +25,21 @@ function Sidebar() {
     }
   };
 
-  const handleStatusChange = () => {};
+  const handleStatusChange = (idTodo) => {
+    dispatch(toggleTodoAction(user, token, idTodo));
+    dispatch(getSingleTodoAction(user, token, idTodo));
+  };
 
   const showStatus = (todo) => (
     <>
       <div className="form-group mt-4">
         <select
           className="form-control"
-          onChange={(e) => handleStatusChange(e, todo.id)}
+          onChange={() => handleStatusChange(todo.id)}
+          value={todo.completed}
         >
-          {todo.completed ? (
-            <>
-              <option>Status: Completed</option>
-              <option>Status: Pending</option>
-            </>
-          ) : (
-            <>
-              <option>Status: Pending</option>
-              <option>Status: Completed</option>
-            </>
-          )}
+          <option value={false}>Status: Pending</option>
+          <option value={true} >Status: Completed</option>
         </select>
       </div>
     </>
@@ -48,6 +49,16 @@ function Sidebar() {
     closeSidebar();
     dispatch(deleteTodoAction(user, token, todo.id));
   };
+
+  const showModal = () => (
+      <Modal
+      title="Edit Task"
+      id="modalEditTask"
+      titleFirstInput="Title (Required)"
+      titleSecondInput="Description"
+      edit={true}
+    />
+  );
 
   return (
     <>
@@ -70,7 +81,7 @@ function Sidebar() {
                 {todo && <h4 className="mt-4">{todo.title}</h4>}
                 {todo && showStatus(todo)}
                 <h6>Created</h6>
-                {todo && moment(todo.createdAt).calendar()}
+                {todo && `${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}` }
                 <h6 className="mt-5">Description</h6>
                 {todo && todo.description}
 
@@ -105,16 +116,7 @@ function Sidebar() {
         </div>
       </div>
 
-      {todo && (
-        <Modal
-        title="Edit Task"
-        id="modalEditTask"
-        titleFirstInput="Title (Required)"
-        titleSecondInput="Description"
-        edit={true}
-        singleTodo={todo}
-      />
-      )}
+      {showModal()}
     </>
   );
 }

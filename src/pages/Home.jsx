@@ -9,11 +9,10 @@ import Sidebar from "../components/Sidebar";
 import DatePicker from "react-date-picker";
 
 function Home() {
-  
-  const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos) || [];
-
+  const [startDate, setStartDate] = useState(new Date());
+  
   const { user, token } = isAuthenticated();
 
 
@@ -27,16 +26,19 @@ function Home() {
   };
 
 
-  // No filtra bien 
   const filterByDate = (date) => {
-    console.log('filtering...');
-    dispatch(filterTodoAction(date))
+    const f = new Date(date);
+    const parseDate = `${f.getDate()}/${f.getMonth()}/${f.getFullYear()}`;
+    if(date === null){
+      dispatch(readTodosAction(user, token))
+    }
+    dispatch(filterTodoAction(parseDate))
   };
 
 
   return (
     <>
-      <Sidebar/>
+      <Sidebar />
       <div className="content-tasks">
         <h1 className="mt-5 h2 ml-3 h2-md ml-0-md">My Tasks</h1>
         <div className="row mt-4">
@@ -46,7 +48,8 @@ function Home() {
                 <div className="d-flex justify-content-between flex-wrap">
                   <h5 className="pt-3">Tasks</h5>
                   <div className="d-flex align-items-center">
-                    <div className="mr-3">
+                    <div className="mr-3  filter d-flex">
+                      <span className="mr-1 mt-1 d-none d-md-block">Created: </span>
                       <DatePicker
                         onChange={(date) => {
                           handleChangeDate(date);
@@ -81,10 +84,10 @@ function Home() {
                 <thead>
                   <tr>
                     <th width="1%" scope="col"></th>
-                    <th width="20%" scope="col" className="h6">
+                    <th width="25%" scope="col" className="h6">
                       Title
                     </th>
-                    <th width="20%" scope="col" className="h6">
+                    <th width="15%" scope="col" className="h6 pl-5">
                       Created
                     </th>
                     <th scope="col" className="h6 d-none d-md-table-cell">

@@ -85,7 +85,7 @@ const Signup = () => {
 
   const showError = () => (
     <div
-      className="alert alert-danger"
+      className="alert alert-danger mt-3"
       style={{ display: error ? "" : "none" }}
     >
       {error}
@@ -93,7 +93,7 @@ const Signup = () => {
   );
 
   const showSucces = () => (
-    <div className="alert alert-info" style={{ display: succes ? "" : "none" }}>
+    <div className="alert alert-info mt-3" style={{ display: succes ? "" : "none" }}>
       New account is created. Please <Link to="/signin">Singin</Link>
     </div>
   );

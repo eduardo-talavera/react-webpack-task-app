@@ -1,3 +1,14 @@
 .react-date-picker__wrapper {
   border: none!important;
 }
+
+.react-date-picker__inputGroup__input{
+  color: rgb(161, 158, 158);
+}
+
+.filter {
+  color: rgb(161, 158, 158);
+  border: 1.5px solid rgb(161, 158, 158);
+  padding: 3px 10px;
+  border-radius: 5px;
+}

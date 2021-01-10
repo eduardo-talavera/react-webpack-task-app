@@ -11,8 +11,7 @@ import {
   MESSAGE,
 } from "../actions/types";
 
-import moment from 'moment';
-import { data } from "jquery";
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,7 +40,7 @@ const reducer = (state, action) => {
     case FAILURE:
       return {
         ...state,
-        error: action.payload,
+        errorMessage: action.payload,
       };
 
     case ADD_TODO:
@@ -72,9 +71,21 @@ const reducer = (state, action) => {
       };
 
     case FILTER_TODOS:
+
+      const parseDate = (todo) => {
+        let todoCopy = {...todo};
+        let f = new Date(todoCopy.createdAt);
+        todoCopy.createdAt = `${f.getDate()}/${f.getMonth()}/${f.getFullYear()}`;
+        return todoCopy.createdAt;
+      }
+
       return {
         ...state,
-        todos: state.todos.filter((todo) => moment(todo.createdAt).calendar() === moment(action.payload).calendar()),
+        todos: state.todos.filter((todo) => { 
+           if (parseDate(todo) === action.payload) {
+             return todo;
+           }
+        }),
       };  
 
     case DELETE_TODO:

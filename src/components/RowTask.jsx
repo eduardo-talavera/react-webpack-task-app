@@ -11,20 +11,22 @@ function RowTask({todo}) {
 
   const dispatch = useDispatch();
   const sidebar = document.getElementById('sidebar');
+  const f = new Date(todo.createdAt);
 
- const {user, token} = isAuthenticated();
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  const openCloseSidebar = () => {
-    dispatch(getSingleTodoAction(user, token, todo.id))
+  const {user, token} = isAuthenticated();
+
+  const openSidebar = () => {
+    dispatch(getSingleTodoAction(user, token, todo.id));
     sidebar.classList.add('open');
     if (sidebar.classList.contains('close')) {
       sidebar.classList.remove('close');
     }
-    // console.log('open/close...');
   }
 
   return (
-    <tr style={{cursor: 'pointer'}} onClick={openCloseSidebar}>
+    <tr style={{cursor: 'pointer'}} onClick={openSidebar}>
       <th scope="row">
         {todo.completed ? (
            <i onClick={() => dispatch(toggleTodoAction(user, token, todo.id))} className="fas fa-check-circle text-success ml-2" style={{fontSize: '20px'}}></i>
@@ -33,7 +35,7 @@ function RowTask({todo}) {
         )}
       </th>
       <td>{todo.title}</td>
-      <td>{moment(todo.createdAt).calendar()}</td>
+      <td className="pl-5">{`${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}`}</td>
       <td className="d-none d-md-table-cell">{todo.description}</td>
     </tr>
   );

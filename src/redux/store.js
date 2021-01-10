@@ -4,7 +4,7 @@ import thunk from "redux-thunk"
 
 const initialState = {
   todos: [],
-  error: false,
+  errorMessage: '',
   loading: false,
   message: "",
   singleTodo: {
