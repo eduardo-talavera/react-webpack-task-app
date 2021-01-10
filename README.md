@@ -27,6 +27,7 @@ Default configuration:
 
 ## Static Files 
 to run the static files run inside the project in a terminal `npx serve -s dist`
+if you want change the port add the port parameter, run `npx serve -s dist -p 3003` for example
 
 
 To clone or download the backend click on the following link 
