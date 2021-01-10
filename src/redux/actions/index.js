@@ -21,30 +21,27 @@ import {
 } from "../../requests";
 
 export const addTodoAction = (user, token, todo) => (dispatch) => {
-  createTodo(user.id, token, todo)
+  return new Promise((resolve, reject) => {
+    createTodo(user.id, token, todo)
     .then((res) => {
       if (res.error) {
-        dispatch({
-          type: FAILURE,
-          payload: res.error,
-        });
+        dispatch({ type: FAILURE, payload: res.error});
+        reject(res.error);
       } else {
-        dispatch({
-          type: ADD_TODO,
-          payload: res.data,
-        });
-        dispatch({
-          type: MESSAGE,
-          payload: res.msg,
-        });
-        dispatch({
-          type: FAILURE,
-          payload: "",
-        });
+        dispatch({type: ADD_TODO, payload: res.data});
+        dispatch({ type: MESSAGE, payload: res.msg });
+        dispatch({ type: FAILURE, payload: ""});
+        resolve(res.msg);
       }
     })
-    .catch((err) => dispatch({ type: FAILURE, payload: err }));
+    .catch(err => {
+        dispatch({ type: FAILURE, payload: err });
+        reject(err);
+      }
+    );
+  });
 };
+
 
 export const deleteTodoAction = (user, token, todoId) => (dispatch) => {
   removeTodo(todoId, user.id, token)
@@ -63,24 +60,29 @@ export const deleteTodoAction = (user, token, todoId) => (dispatch) => {
     .catch((err) => dispatch({ type: FAILURE, payload: err }));
 };
 
+
 export const updateTodoAction = (user, token, todoId, data) => (dispatch) => {
-  updateTodo(todoId, user.id, token, data)
-    .then((res) => {
-      if (res.error) {
-        dispatch({
-          type: FAILURE,
-          payload: res.error,
-        });
-      } else {
-        console.log(res);
-        dispatch({ type: UPDATE_TODO, payload: res.data });
-        dispatch({ type: GET_TODO, payload: todoId });
-        dispatch({ type: MESSAGE, payload: res.msg });
-        dispatch({ type: FAILURE, payload: "" });
-      }
-    })
-    .catch((err) => dispatch({ type: FAILURE, payload: err }));
+  return new Promise((resolve, reject) => {
+    updateTodo(todoId, user.id, token, data)
+      .then((res) => {
+        if (res.error) {
+          dispatch({ type: FAILURE, payload: res.error });
+          reject(res.error);
+        } else {
+          dispatch({ type: UPDATE_TODO, payload: res.data });
+          dispatch({ type: GET_TODO, payload: todoId });
+          dispatch({ type: MESSAGE, payload: res.msg });
+          dispatch({ type: FAILURE, payload: "" });
+          resolve(res.msg);
+        }
+      })
+      .catch((err) => {
+        dispatch({ type: FAILURE, payload: err });
+        reject(err);
+      });
+  });
 };
+
 
 export const getSingleTodoAction = (user, token, todoId) => (dispatch) => {
   read(todoId, user.id, token)
@@ -99,6 +101,7 @@ export const getSingleTodoAction = (user, token, todoId) => (dispatch) => {
     .catch((err) => dispatch({ type: FAILURE, payload: err }));
 };
 
+
 export const toggleTodoAction = (user, token, todoId) => (dispatch) => {
   changeStatusTodo(todoId, user.id, token)
     .then((res) => {
@@ -116,12 +119,14 @@ export const toggleTodoAction = (user, token, todoId) => (dispatch) => {
     .catch((err) => dispatch({ type: FAILURE, payload: err }));
 };
 
+
 export const readTodosAction = (user, token) => (dispatch) => {
   dispatch({ type: LOADING });
   getTodos(user.id, token)
     .then((data) => dispatch({ type: SUCCESS, payload: data }))
     .catch((err) => dispatch({ type: FAILURE, payload: err }));
 };
+
 
 export const filterTodoAction = (date) => (dispatch) => {
   dispatch({

@@ -43,7 +43,7 @@ export const read =  async (idTodo, userId, token) => {
   .catch(err => console.log(err));
 }
 
-export const updateTodo =  async (idTodo, userId, token, todoData) => {
+export const updateTodo = async (idTodo, userId, token, todoData) => {
   return await fetch(`${API}/todos/${idTodo}/${userId}`, {
     method: "PUT",
     headers: {

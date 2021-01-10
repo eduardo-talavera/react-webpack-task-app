@@ -39,7 +39,7 @@ function Home() {
   return (
     <>
       <Sidebar />
-      <div className="content-tasks">
+      <div className="content-tasks mb-5">
         <h1 className="mt-5 h2 ml-3 h2-md ml-0-md">My Tasks</h1>
         <div className="row mt-4">
           <div className="col-12">

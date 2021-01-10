@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoAction, updateTodoAction } from "../redux/actions";
 
@@ -17,7 +17,7 @@ function Modal({
 }) {
 
   const singleTodo = useSelector((state) => state.singleTodo);
-  const errorMsg = useSelector((state) => state.errorMessage) || "";
+  const errorMsg = useSelector((state) => state.errorMessage);
   const dispatch = useDispatch();
 
   const [todo, setTodo] = useState({
@@ -45,18 +45,25 @@ function Modal({
 
 
   const addTodo = () => {
-    dispatch(addTodoAction(user, token, todo));
+    dispatch(addTodoAction(user, token, todo))
+      .then((msg) => {
+        console.log(msg);
 
-    if (!errorMsg.length) $(`#${id}`).modal("show");
+        $(`#${id}`).modal("hide");
 
-    setTodo({
-      title: "",
-      description: "",
-    });
+        setTodo({
+          title: "",
+          description: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
 
   const updateTodo = () => {
+
     const { title, description } = todo;
     const { id } = singleTodo;
 
@@ -65,16 +72,14 @@ function Modal({
         updatedBy: user.name,
         title,
         description,
+      }))
+      .then((msg) => {
+        console.log(msg);
+        $('#modalEditTask').modal("hide");
       })
-    );
-
-    if (!errorMsg.length) $(`#${id}`).modal("hide");
-
-    setTodo({
-      title: "",
-      description: "",
-    });
-
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
 
