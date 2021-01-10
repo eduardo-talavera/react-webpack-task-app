@@ -26,7 +26,7 @@ Default configuration:
 - Production: run in a terminal `npm run build`
 
 ## Static Files 
-to run the static files run inside the project in a terminal `npx serve -s dist`, 
+to run the static files run inside the project in a terminal `npx serve -s dist`
 
 
 To clone or download the backend click on the following link 
