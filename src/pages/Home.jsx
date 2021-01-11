@@ -44,7 +44,7 @@ function Home() {
         <div className="row mt-4">
           <div className="col-12">
             <div className="card">
-              <div className="card-header bg-white">
+              <div className="card-header bg-white" style={{borderBottom: '1px solid #c7c4c4'}}>
                 <div className="d-flex justify-content-between flex-wrap">
                   <h5 className="pt-3">Tasks</h5>
                   <div className="d-flex align-items-center">
@@ -59,7 +59,7 @@ function Home() {
                     </div>
                     <div
                       className="text-secondary"
-                      style={{ borderLeft: "1px solid", height: "75%" }}
+                      style={{ borderLeft: "1px solid", height: "60%" }}
                     ></div>
                     <button
                       type="button"
@@ -87,7 +87,7 @@ function Home() {
                     <th width="25%" scope="col" className="h6">
                       Title
                     </th>
-                    <th width="15%" scope="col" className="h6 pl-5">
+                    <th width="25%" scope="col" className="h6 pl-5">
                       Created
                     </th>
                     <th scope="col" className="h6 d-none d-md-table-cell">

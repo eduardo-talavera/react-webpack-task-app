@@ -31,7 +31,7 @@ function Sidebar() {
   };
 
   const showStatus = (todo) => (
-    <>
+    <div>
       <div className="form-group mt-4">
         <select
           className="form-control"
@@ -42,7 +42,7 @@ function Sidebar() {
           <option value={true} >Status: Completed</option>
         </select>
       </div>
-    </>
+    </div>
   );
 
   const deleteTodo = () => {
@@ -78,25 +78,28 @@ function Sidebar() {
             </div>
             <div className="row">
               <div className="col-12">
-                {todo && <h4 className="mt-4">{todo.title}</h4>}
-                {todo && showStatus(todo)}
-                <h6>Created</h6>
-                {todo && `${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}` }
-                <h6 className="mt-5">Description</h6>
-                {todo && todo.description}
+                <div className="px-3">
+                  {todo && <h4 className="mt-5">{todo.title}</h4>}
+                  {todo && showStatus(todo)}
+                  <h6>Created</h6>
+                  {todo && `${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}` }
+                  <h6 className="mt-5">Description</h6>
+                  {todo && todo.description}
 
-               {todo && todo.updatedBy && (
-                <div className="mt-3">
-                  <p>Updated {moment(todo.updatedAt).calendar()} <br/>
-                  by {todo.updatedBy}</p>
+                 {todo && todo.updatedBy && (
+                  <div className="mt-3">
+                    <p>Updated {moment(todo.updatedAt).calendar()} <br/>
+                    by {todo.updatedBy}</p>
+                  </div>
+                  )}
                 </div>
-               )}
               </div>
             </div>
           </div>
         </div>
 
         <div className="sidebar-footer container-fluid">
+          <div className="px-3">
           {todo && (
             <button onClick={deleteTodo} className="btn btn-secondary mr-3">
               <i className="fa fa-trash text-primary mr-3"></i>
@@ -113,6 +116,7 @@ function Sidebar() {
               Edit
             </button>
           )}
+          </div>
         </div>
       </div>
 
