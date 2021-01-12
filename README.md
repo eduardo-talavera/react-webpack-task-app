@@ -1,4 +1,4 @@
-# React Webpack Task App 
+# React Webpack Tasks App 
 
 ## Minimum requirements 📄
 - Node >= 12.8
