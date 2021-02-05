@@ -114,6 +114,7 @@ export const toggleTodoAction = (user, token, todoId) => (dispatch) => {
         });
       } else {
         dispatch({ type: TOGGLE_TODO, payload: todoId });
+        dispatch({type: STOP_LOADING});
         dispatch({ type: MESSAGE, payload: res.msg });
         dispatch({ type: FAILURE, payload: "" });
       }
