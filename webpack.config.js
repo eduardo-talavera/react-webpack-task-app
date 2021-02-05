@@ -3,6 +3,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require('dotenv-webpack');
+const appEnv = process.env.NODE_ENV || 'development'
+
 
 module.exports = {
   entry: "./src/index.js",
@@ -52,7 +54,7 @@ module.exports = {
       filename: "[name]-styles.css",
     }),
     new Dotenv({
-      path: './development.env',
+      path: appEnv === 'production' ? './production.env' : './development.env',
     }),
   ],
 };
