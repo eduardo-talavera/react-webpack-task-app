@@ -6,12 +6,14 @@ import RowTask from "../../components/tasks/RowTask";
 import Modal from "../../components/common/Modal";
 import SidebarTask from "../../components/tasks/SidebarTask";
 import DatePicker from "react-date-picker";
+import preloader from "../../assets/img/preloader.gif";
 
 const Home = () => {
 
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos) || [];
+  const loading = useSelector((state) => state.loading);
   const { user, token } = isAuthenticated();
 
 
@@ -101,6 +103,11 @@ const Home = () => {
                     : null}
                 </tbody>
               </table>
+              {loading && (
+                <div className="content_preloader_home">
+                  <img src={preloader} />
+                </div>
+              )}
             </div>
           </div>
         </div>
