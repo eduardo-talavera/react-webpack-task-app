@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
-import { readTodosAction, filterTodoAction } from "../redux/actions";
-import { isAuthenticated } from "../auth";
-import RowTask from "../components/RowTask";
-import Modal from "../components/Modal";
-import Sidebar from "../components/Sidebar";
+import { readTodosAction, filterTodoAction } from "../../redux/actions";
+import { isAuthenticated } from "../../services/authService.js";
+import RowTask from "../../components/tasks/RowTask";
+import Modal from "../../components/common/Modal";
+import SidebarTask from "../../components/tasks/SidebarTask";
 import DatePicker from "react-date-picker";
 
-function Home() {
+const Home = () => {
+
+  const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos) || [];
-  const [startDate, setStartDate] = useState(new Date());
-  
   const { user, token } = isAuthenticated();
 
 
   useEffect(() => {
     dispatch(readTodosAction(user, token));
   }, []);
+
 
   const handleChangeDate = (date) => {
     setStartDate(date);
@@ -38,7 +38,7 @@ function Home() {
 
   return (
     <>
-      <Sidebar />
+      <SidebarTask />
       <div className="content-tasks mb-5">
         <h1 className="mt-5 h2 ml-3 h2-md ml-0-md">My Tasks</h1>
         <div className="row mt-4">

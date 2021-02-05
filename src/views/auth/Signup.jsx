@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { signup } from "../auth";
+import { signup } from "../../services/authService.js";
 
 const Signup = () => {
+
+  // Hoks
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -11,8 +13,11 @@ const Signup = () => {
     succes: false,
   });
 
+  // Vars
   const { name, email, password, succes, error } = values;
 
+
+  // Functions
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
@@ -36,6 +41,8 @@ const Signup = () => {
     });
   };
 
+
+  // Componets
   const signUpForm = () => (
     <form>
       <div className="form-group">

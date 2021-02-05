@@ -1,17 +1,18 @@
 import React from "react";
-import PrivateRoute from "./auth/privateRoute";
+import PrivateRoute from "./components/auth/PrivateRoute";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import "popper.js";
-import "jquery";
-import "bootstrap";
-import "./sass/main.scss";
-
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
-import Signup from './pages/Signup';
-import Signin from './pages/Signin';
-import Home from "./pages/Home";
+import "popper.js";
+import "jquery";
+import "bootstrap";
+import "./assets/sass/main.scss";
+
+// Views
+import Signup from './views/auth/Signup';
+import Signin from './views/auth/Signin';
+import Home from "./views/tasks/ManageTasks";
 
 
 function App() {

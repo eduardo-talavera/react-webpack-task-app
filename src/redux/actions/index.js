@@ -9,6 +9,7 @@ import {
   FILTER_TODOS,
   GET_TODO,
   UPDATE_TODO,
+  STOP_LOADING,
 } from "./types";
 
 import {
@@ -18,7 +19,7 @@ import {
   changeStatusTodo,
   read,
   updateTodo,
-} from "../../requests";
+} from "../../services/todoService";
 
 export const addTodoAction = (user, token, todo) => (dispatch) => {
   return new Promise((resolve, reject) => {
@@ -71,6 +72,7 @@ export const updateTodoAction = (user, token, todoId, data) => (dispatch) => {
         } else {
           dispatch({ type: UPDATE_TODO, payload: res.data });
           dispatch({ type: GET_TODO, payload: todoId });
+          dispatch({type: STOP_LOADING})
           dispatch({ type: MESSAGE, payload: res.msg });
           dispatch({ type: FAILURE, payload: "" });
           resolve(res.msg);

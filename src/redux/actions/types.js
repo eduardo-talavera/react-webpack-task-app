@@ -7,5 +7,6 @@ export const FILTER_TODOS = 'FILTER_TODOS';
 export const MESSAGE = 'MESSAGE';
 
 export const LOADING = "LOADING";
+export const STOP_LOADING = 'STOP_LOADING';
 export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";

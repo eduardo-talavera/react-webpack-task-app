@@ -6,6 +6,7 @@ import {
   UPDATE_TODO,
   GET_TODO,
   LOADING,
+  STOP_LOADING,
   FAILURE,
   SUCCESS,
   MESSAGE,
@@ -67,7 +68,7 @@ const reducer = (state, action) => {
           todo.id === id
             ? { ...todo, title, description, updatedBy, updatedAt }
             : todo
-        ),
+        )
       };
 
     case FILTER_TODOS:
@@ -97,8 +98,15 @@ const reducer = (state, action) => {
     case GET_TODO:
       return {
         ...state,
+        loading: true,
         singleTodo: state.todos.find((todo) => todo.id === action.payload),
-      };  
+      };
+    
+    case STOP_LOADING:
+      return {
+          ...state,
+          loading: false,
+      };
 
     default:
       return {

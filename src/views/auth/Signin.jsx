@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { signin, authenticate, isAuthenticated } from "../auth";
+import { signin, authenticate, isAuthenticated } from "../../services/authService.js";
 
 const Signin = () => {
+
+  // Hooks
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -11,9 +13,12 @@ const Signin = () => {
     redirectToReferrer: false,
   });
 
+  // vars
   const { email, password, loading, error, redirectToReferrer } = values;
-  const { user } = isAuthenticated();
 
+
+
+  // methods
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
@@ -34,6 +39,9 @@ const Signin = () => {
       }
     });
   };
+
+
+  // components
 
   const signInForm = () => (
     <form>
