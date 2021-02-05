@@ -1,21 +1,16 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteTodoAction,
-  getSingleTodoAction,
-  toggleTodoAction,
-} from "../../redux/actions";
+import { deleteTodoAction, toggleTodoAction } from "../../redux/actions";
+import { isAuthenticated } from "../../services/authService";
 import moment from "moment";
 import Modal from "../common/Modal";
-import { isAuthenticated } from "../../services/authService";
 import { months } from "../../helpers/constants";
 import preloader from "../../assets/img/preloader.gif";
 
 
 
-function SidebarTask() {
+const SidebarTask = () => {
 
-  
   const todo = useSelector((state) => state.singleTodo);
   const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
@@ -33,7 +28,6 @@ function SidebarTask() {
 
   const handleStatusChange = (idTodo) => {
     dispatch(toggleTodoAction(user, token, idTodo));
-    dispatch(getSingleTodoAction(user, token, idTodo));
   };
 
 

@@ -98,6 +98,10 @@ export const getSingleTodoAction = (user, token, todoId) => (dispatch) => {
         dispatch({ type: GET_TODO, payload: todoId });
         dispatch({ type: MESSAGE, payload: res.msg });
         dispatch({ type: FAILURE, payload: "" });
+
+        setTimeout(() => {
+          dispatch({type: STOP_LOADING})
+        },500);
       }
     })
     .catch((err) => dispatch({ type: FAILURE, payload: err }));
@@ -114,7 +118,8 @@ export const toggleTodoAction = (user, token, todoId) => (dispatch) => {
         });
       } else {
         dispatch({ type: TOGGLE_TODO, payload: todoId });
-        dispatch({type: STOP_LOADING});
+        dispatch({ type: GET_TODO, payload: todoId });
+        dispatch({ type: STOP_LOADING});
         dispatch({ type: MESSAGE, payload: res.msg });
         dispatch({ type: FAILURE, payload: "" });
       }

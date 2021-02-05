@@ -36,8 +36,7 @@ function FormTask({todo, handleChange, titleFirstInput, titleSecondInput}) {
           id="message-text"
         ></textarea>
         {errorMsg &&
-          errorMsg ===
-            "the description cannot contain more than 300 characters" && (
+          errorMsg === "the description cannot contain more than 300 characters" && (
             <div className="text-danger">{errorMsg}</div>
           )}
       </div>

@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { toggleTodoAction, getSingleTodoAction } from "../../redux/actions";
 import { isAuthenticated } from "../../services/authService.js";
 import { months } from '../../helpers/constants';
-import { STOP_LOADING } from "../../redux/actions/types";
 
 
 const RowTask = ({ todo }) => {
@@ -20,13 +19,10 @@ const RowTask = ({ todo }) => {
     if (sidebar.classList.contains('close')) {
       sidebar.classList.remove('close');
     }
-    setTimeout(() => {
-      dispatch({type: STOP_LOADING});
-    }, 500)
   }
 
   return (
-    <tr style={{ cursor: 'pointer' }} onClick={openSidebar}>
+    <tr style={{cursor: 'pointer'}}>
       <th scope="row">
         {todo.completed ? (
           <i onClick={() => dispatch(toggleTodoAction(user, token, todo.id))} className="fas fa-check-circle text-success ml-2" style={{ fontSize: '20px' }}></i>
@@ -34,9 +30,9 @@ const RowTask = ({ todo }) => {
             <i onClick={() => dispatch(toggleTodoAction(user, token, todo.id))} className="far fa-check-circle ml-2" style={{ color: '#a3a8b3', fontSize: '20px' }}></i>
           )}
       </th>
-      <td>{todo.title}</td>
-      <td className="pl-5">{`${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}`}</td>
-      <td className="d-none d-md-table-cell">{todo.description}</td>
+      <td onClick={openSidebar} >{todo.title}</td>
+      <td onClick={openSidebar} className="pl-5">{`${f.getDate()}/${months[f.getMonth()]}/${f.getFullYear()}`}</td>
+      <td onClick={openSidebar} className="d-none d-md-table-cell">{todo.description}</td>
     </tr>
   );
 }
