@@ -103,7 +103,7 @@ const Home = () => {
                     : null}
                 </tbody>
               </table>
-              {loading && (
+              {!todos.length && (
                 <div className="content_preloader_home">
                   <img src={preloader} />
                 </div>
