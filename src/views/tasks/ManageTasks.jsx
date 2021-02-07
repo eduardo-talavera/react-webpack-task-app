@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { readTodosAction, filterTodoAction } from "../../redux/actions";
 import { isAuthenticated } from "../../services/authService.js";
+import DefaultLayout from "../../Layout/DefaultLayout";
 import CardTask from "../../components/tasks/CardTask";
 import Modal from "../../components/common/Modal";
 import SidebarTask from "../../components/tasks/SidebarTask";
@@ -20,7 +21,6 @@ const Home = () => {
     dispatch(readTodosAction(user, token));
   }, []);
 
-
   const handleChangeDate = (date) => {
     setStartDate(date);
     filterByDate(date);
@@ -38,7 +38,7 @@ const Home = () => {
 
 
   return (
-    <>
+    <DefaultLayout>
       <SidebarTask />
       <div className="content-tasks mb-5">
         <div className="row mt-4">
@@ -98,7 +98,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </DefaultLayout>
   );
 }
 
