@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { readTodosAction, filterTodoAction } from "../../redux/actions";
 import { isAuthenticated } from "../../services/authService.js";
-import RowTask from "../../components/tasks/RowTask";
+import CardTask from "../../components/tasks/CardTask";
 import Modal from "../../components/common/Modal";
 import SidebarTask from "../../components/tasks/SidebarTask";
 import DatePicker from "react-date-picker";
@@ -13,7 +13,6 @@ const Home = () => {
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos) || [];
-  const loading = useSelector((state) => state.loading);
   const { user, token } = isAuthenticated();
 
 
@@ -42,15 +41,14 @@ const Home = () => {
     <>
       <SidebarTask />
       <div className="content-tasks mb-5">
-        <h1 className="mt-5 h2 ml-3 h2-md ml-0-md">My Tasks</h1>
         <div className="row mt-4">
           <div className="col-12">
-            <div className="card">
-              <div className="card-header bg-white" style={{borderBottom: '1px solid #c7c4c4'}}>
-                <div className="d-flex justify-content-between flex-wrap">
-                  <h5 className="pt-3">Tasks</h5>
-                  <div className="d-flex align-items-center">
-                    <div className="mr-3  filter d-flex">
+            <div>
+              <div className="card-header">
+                <div className="d-flex flex-wrap">
+                  <h4 className="mr-5">Tasks</h4>
+                  <div className="d-flex align-items-center flex-wrap">
+                    <div className="mr-3 filter d-flex">
                       <span className="mr-1 mt-1 d-none d-md-block">Created: </span>
                       <DatePicker
                         onChange={(date) => {
@@ -72,6 +70,7 @@ const Home = () => {
                       <i className="fas fa-plus-circle mr-2"></i>
                       Add Task
                     </button>
+                    </div>
                     <Modal
                       title="New Task"
                       id="modalNewTask"
@@ -81,34 +80,21 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              {/*table*/}
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th width="1%" scope="col"></th>
-                    <th width="25%" scope="col" className="h6">
-                      Title
-                    </th>
-                    <th width="25%" scope="col" className="h6 pl-5">
-                      Created
-                    </th>
-                    <th scope="col" className="h6 d-none d-md-table-cell">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {todos.length
-                    ? todos.map((todo, i) => <RowTask key={i} todo={todo} />)
-                    : null}
-                </tbody>
-              </table>
+              
+             <div className="container-fluid">
+               <div className="row mt-5">
+                {todos.length
+                  ? todos.map((todo, i) => <CardTask key={i} todo={todo} />)
+                  : null
+                }
+               </div>
+             </div>
+
               {!todos.length && (
                 <div className="content_preloader_home">
                   <img src={preloader} />
                 </div>
               )}
-            </div>
           </div>
         </div>
       </div>

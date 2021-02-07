@@ -9,6 +9,9 @@ import "jquery";
 import "bootstrap";
 import "./assets/sass/main.scss";
 
+// layout
+import Header from './components/layout/Header';
+
 // Views
 import Signup from './views/auth/Signup';
 import Signin from './views/auth/Signin';
@@ -19,6 +22,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <Header />
         <div className="container-fluid">
           <Switch>
             <Route path="/signin" exact component={Signin} />

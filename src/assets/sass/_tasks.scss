@@ -1,0 +1,14 @@
+
+.content-tasks {
+  .card-header {
+    background: none!important;
+  }
+
+  .card_task {
+    min-height: 100px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+}
