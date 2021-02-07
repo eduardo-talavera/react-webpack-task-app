@@ -1,5 +1,5 @@
 #sidebar {
-  position: absolute;
+  position: fixed;
   right: -650px;
   top: 70px;
   z-index: 10;
@@ -19,11 +19,11 @@
 
 }
 
-.open {
+.open_sidebar {
   right: 0!important;
 }
 
-.close {
+.close_sidebar {
   right: -650px;
   transition: .3s ease-in-out;
 }
@@ -34,7 +34,7 @@
     width: 90%;
     right: -90%;
   } 
-  .close {
+  .close_sidebar {
     right: -90%!important;
     transition: .3s ease-in-out;
   }

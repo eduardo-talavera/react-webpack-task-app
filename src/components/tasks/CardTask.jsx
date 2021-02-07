@@ -18,10 +18,10 @@ const CardTask = ({ todo }) => {
     if(e.target.classList.contains('fa-check-circle')) return
 
     dispatch(getSingleTodoAction(user, token, todo.id));
-    sidebar.classList.add("open");
+    sidebar.classList.add("open_sidebar");
 
-    if (sidebar.classList.contains("close")) {
-      sidebar.classList.remove("close");
+    if (sidebar.classList.contains("close_sidebar")) {
+      sidebar.classList.remove("close_sidebar");
     }
 
   };

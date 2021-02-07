@@ -108,7 +108,7 @@ const Signup = () => {
   return (
     <div className="row justify-content-center mt-5 py-5">
       <div className="col-lg-4">
-        <h1 className="text-center mb-3">Signup to Tasks App</h1>
+        <h1 className="text-center mb-3">Signup to Taskapi</h1>
         <p className="text-primary text-center h4">
           <Link to="/signin">Or SignIn</Link>
         </p>

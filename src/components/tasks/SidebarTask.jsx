@@ -17,9 +17,9 @@ const SidebarTask = () => {
   const f = todo ? new Date(todo.createdAt) : null;
 
   const closeSidebar = () => {
-    sidebar.classList.add("close");
-    if (sidebar.classList.contains("open")) {
-      sidebar.classList.remove("open");
+    sidebar.classList.add("close_sidebar");
+    if (sidebar.classList.contains("open_sidebar")) {
+      sidebar.classList.remove("open_sidebar");
     }
   };
 
@@ -93,28 +93,28 @@ const SidebarTask = () => {
                     <div className="sidebar-body">
                       <div className="row">
                         <div className="col-12">
-                          <div className="px-2">
+                          <div>
                             {todo && <h4 className="mt-2">{todo.title}</h4>}
-                            <h6 className="mt-5 font-weight-normal">Created: &nbsp; 
+                            <p className="mt-5 font-weight-normal">Created: &nbsp; 
                               {todo &&
                                 `${f.getDate()}/${
                                   months[f.getMonth()]
                               }/${f.getFullYear()}`}
-                            </h6>
+                            </p>
                           
                             {todo && todo.description && (
                               <>
                                 <h6 className="mt-5">Description: </h6>
-                                <h6 className="font-weight-normal">{todo.description}</h6>
+                                <p className="font-weight-normal">{todo.description}</p>
                               </>
                             )}
 
                             {todo && todo.updatedBy && (
                               <div className="mt-5">
-                                <h6 className="font-weight-normal">
+                                <p className="font-weight-normal">
                                   Updated {moment(todo.updatedAt).calendar()} <br />
                                   by {todo.updatedBy}
-                                </h6>
+                                </p>
                               </div>
                             )}
                           </div>
